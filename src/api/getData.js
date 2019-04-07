@@ -21,6 +21,16 @@ export const getSignonList = data => fetch('/admin/signon/getSignonList', data, 
 export const addSignon = data => fetch('/admin/signon/addSignon', data, 'POST')
 
 /**
+ * 根据id删除签到模板
+ */
+export const deleteSignon = data => fetch('/admin/signon/deleteSignon', data, 'POST')
+
+/**
+ * 批量删除签到活动模板
+ */
+export const bulkDeleteSignOn = data => fetch('/admin/signon/bulkDeleteSignOn', data, 'POST')
+
+/**
  * 获取场景列表
  */
 export const getSceneList = data => fetch('/admin/scene/getSceneList', data, 'POST')
@@ -34,6 +44,7 @@ export const addScene = data => fetch('/admin/scene/addScene', data, 'POST')
  * 新建场景签到活动数据
  */
 export const addScenesign = data => fetch('/admin/scenesign/addScenesign', data, 'POST')
+
 /**
  * 批量新建场景签到活动数据
  */
@@ -41,6 +52,7 @@ export const bulkAddScenesign = data => fetch('/admin/scenesign/bulkAddScenesign
 /**
  * 批量删除场景签到活动数据
  */
+
 export const bulkDeleteScenesign = data => fetch('/admin/scenesign/bulkDeleteScenesign', data, 'POST')
 /**
  * 获取签到场景列表

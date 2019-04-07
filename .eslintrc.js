@@ -22,10 +22,10 @@ module.exports = {
   // add your custom rules here
   rules: {
     "no-tabs": 0,
-    'no-mixed-spaces-and-tabs': 0,
+   // 'no-mixed-spaces-and-tabs': 0,
 
     // allow async-await
-    'generator-star-spacing': 'off',
+   // 'generator-star-spacing': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
