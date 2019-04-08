@@ -54,6 +54,7 @@ export const bulkAddScenesign = data => fetch('/admin/scenesign/bulkAddScenesign
  */
 
 export const bulkDeleteScenesign = data => fetch('/admin/scenesign/bulkDeleteScenesign', data, 'POST')
+
 /**
  * 获取签到场景列表
  */
@@ -63,3 +64,18 @@ export const getScenesignList = data => fetch('/admin/scenesign/getScenesignList
  * 根据场景id获取签到活动列表
  */
 export const getSignonListBySceneId = data => fetch('/admin/signon/getSignonListBySceneId', data, 'POST')
+
+/**
+ * 获取奖品列表
+ */
+export const getPrizeList = data => fetch('/admin/prize/getPrizeList', data, 'POST')
+
+/**
+ * 删除奖品
+ */
+export const deletePrize = data => fetch('/admin/prize/deletePrize', data, 'POST')
+
+/**
+ * 批量删除奖品
+ */
+export const bulkDeletePrize = data => fetch('/admin/prize/bulkDeletePrize', data, 'POST')

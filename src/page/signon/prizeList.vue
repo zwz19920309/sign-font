@@ -52,6 +52,7 @@ export default {
       if ((res.code === 0) && (res.data.list.length)) {
         this.sceneList = res.data.list
       }
+      this.changePrizeList()
     },
     async handleSigonList (index, row, type) {
       this.scene = row

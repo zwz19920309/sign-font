@@ -10,7 +10,7 @@ export default {
 
 <style lang="less">
   @import '../style/mixin';
-  .header_container{
+  .header_container {
 	  background-color: #EFF2F7;
 	  height: 60px;
 	  display: flex;
@@ -18,12 +18,12 @@ export default {
 	  align-items: center;
     padding-left: 20px;
   }
-  .avator{
+  .avator {
 	  .wh(36px, 36px);
 	    border-radius: 50%;
 	    margin-right: 37px;
 	  }
-    .el-dropdown-menu__item{
+    .el-dropdown-menu__item {
       text-align: center;
-	 }
+		}		
 </style>

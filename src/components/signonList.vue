@@ -15,6 +15,16 @@
         </template>
       </el-table-column>
       <el-table-column prop="rule_desc" label="规则描述" width="250"></el-table-column>
+      <el-table-column label="奖品管理" width="150">
+        <template slot-scope="scope" >
+          <div v-if="scope.row.cycle_text.number">
+            <!-- <span  class="price_num" v-for="num in (parseInt(scope.row.cycle_text.number))" :key="num">
+            {{ num }}
+            </span> -->
+            <span class="price_detial" @click="toPrizeList">奖品详情</span>
+          </div>  
+        </template>
+      </el-table-column>
       <el-table-column prop="start_at" label="开始时间"></el-table-column>
       <el-table-column prop="end_at" label="结束时间"></el-table-column>
       <el-table-column prop="createdAt" label="创建时间"></el-table-column>
@@ -66,12 +76,15 @@ export default {
       let ids = []
       this.signons.forEach(ele => {
         ids.push(ele.id)
-      });
-      let res = await bulkDeleteSignOn ({ 'ids': ids })
+      })
+      let res = await bulkDeleteSignOn({ 'ids': ids })
       if (res.code === 0) {
         this.$message({ message: '删除成功', type: 'success' })
         this.callBack && this.callBack()
       }
+    },
+    toPrizeList () {
+      this.$router.push({ path:'/prizeList' })
     }
   },
   props: ['signonList', 'isEdit', 'callBack']
@@ -79,4 +92,10 @@ export default {
 </script>
 
 <style lang="less">
+.price_detial {
+  padding: 0 5px;
+  text-decoration: underline;
+  color: #409EFF;
+  cursor: pointer;
+}
 </style>
