@@ -47,10 +47,10 @@ export default {
       this.initData(this.pageInfo)
     },
     async handleSizeChange (data) {
-      console.log('@handleSizeChange: --data： ')
+      this.sizeChange && this.sizeChange(data, { type: 1 })
     },
     async handleCurrentChange (data) {
-      console.log('@handleCurrentChange: --data： ')
+      this.currentChange && this.currentChange(data, { type: 1 })
     },
     open (params) { // 参数dynamic
       this.dynamic = params
@@ -60,7 +60,7 @@ export default {
       this.dialogShow = false
     }
   },
-  props: ['callBack', 'isEdit', 'prizeList', 'total'],
+  props: ['sizeChange', 'currentChange', 'isEdit', 'prizeList', 'total'],
   watch: {
     'prizeList': function (newVal, oldVal) {
       this.cPrizeList = newVal
