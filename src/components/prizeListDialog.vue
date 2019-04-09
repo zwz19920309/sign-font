@@ -1,6 +1,10 @@
 <template>
   <el-dialog  title="奖品列表" :visible.sync="dialogShow">
-    <prize-list :callBack="callBcakHandler" :isEdit="isEdit" :prizeList="prizeList" :dynamic="dynamic"></prize-list>
+    <prize-list :callBack="callBcakHandler" :isEdit="isEdit" :prizeList="cPrizeList" :dynamic="dynamic"></prize-list>
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="pageInfo.currentPage" :page-sizes="[1, 2, 3, 4]" :page-size="pageInfo.pageSize"
+      layout="sizes, prev, pager, next"
+      :total="cTotal">
+    </el-pagination>
   </el-dialog>
 </template>
 
@@ -13,25 +17,27 @@ export default {
   data () {
     return {
       dialogShow: false,
-      prizeList: [],
+      cPrizeList: this.prizeList || [],
       cData: [],
-      type: 1,
+      cTotal: 0,
       pageInfo: {
         currentPage: 1,
-        pageSize: 10,
-        total: 0
+        pageSize: 10
       },
       dynamic: null
     }
   },
   created () {
-    this.initData(this.pageInfo)  
+    this.initData(this.pageInfo)
   },
   methods: {
     async initData (pageInfo) {
-      let res = await getPrizeList(pageInfo)
-      if (res.code === 0) {
-        this.prizeList = res.data.list
+      if (this.cPrizeList && (this.cPrizeList.length < 1)) {
+        let res = await getPrizeList(pageInfo)
+        if (res.code === 0) {
+          this.cPrizeList = res.data.list
+          this.cTotal = res.data.total
+        }
       }
     },
     handleSelectionChange (data) {
@@ -39,6 +45,12 @@ export default {
     },
     callBcakHandler () {
       this.initData(this.pageInfo)
+    },
+    async handleSizeChange (data) {
+      console.log('@handleSizeChange: --data： ')
+    },
+    async handleCurrentChange (data) {
+      console.log('@handleCurrentChange: --data： ')
     },
     open (params) { // 参数dynamic
       this.dynamic = params
@@ -48,7 +60,15 @@ export default {
       this.dialogShow = false
     }
   },
-  props: ['callBack', 'isEdit']
+  props: ['callBack', 'isEdit', 'prizeList', 'total'],
+  watch: {
+    'prizeList': function (newVal, oldVal) {
+      this.cPrizeList = newVal
+    },
+   'total': function (newVal, oldVal) {
+      this.cTotal = newVal
+    }
+  }
 }
 </script>
 

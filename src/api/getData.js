@@ -21,6 +21,10 @@ export const getSignonList = data => fetch('/admin/signon/getSignonList', data, 
 export const addSignon = data => fetch('/admin/signon/addSignon', data, 'POST')
 
 /**
+ * 场景配置奖励
+ */
+export const signonBulkAddPrizes = data => fetch('/admin/signon/bulkAddPrizes', data, 'POST')
+/**
  * 根据id删除签到模板
  */
 export const deleteSignon = data => fetch('/admin/signon/deleteSignon', data, 'POST')
@@ -61,6 +65,11 @@ export const bulkDeleteScenesign = data => fetch('/admin/scenesign/bulkDeleteSce
 export const getScenesignList = data => fetch('/admin/scenesign/getScenesignList', data, 'POST')
 
 /**
+ * 根据id获取签到场景
+ */
+export const getSignonById = data => fetch('/admin/signon/getSignonById', data, 'POST')
+
+/**
  * 根据场景id获取签到活动列表
  */
 export const getSignonListBySceneId = data => fetch('/admin/signon/getSignonListBySceneId', data, 'POST')
@@ -79,3 +88,8 @@ export const deletePrize = data => fetch('/admin/prize/deletePrize', data, 'POST
  * 批量删除奖品
  */
 export const bulkDeletePrize = data => fetch('/admin/prize/bulkDeletePrize', data, 'POST')
+
+/**
+ * 获取模板日期奖品列表
+ */
+export const getPrizesBySignonById = data => fetch('/admin/signon/getPrizesBySignonById', data, 'POST')

@@ -21,7 +21,7 @@
             <!-- <span  class="price_num" v-for="num in (parseInt(scope.row.cycle_text.number))" :key="num">
             {{ num }}
             </span> -->
-            <span class="price_detial" @click="toPrizeList">奖品详情</span>
+            <span class="price_detial" @click="toPrizeList(scope.$index, scope.row)">奖品详情</span>
           </div>  
         </template>
       </el-table-column>
@@ -83,8 +83,8 @@ export default {
         this.callBack && this.callBack()
       }
     },
-    toPrizeList () {
-      this.$router.push({ path:'/prizeList' })
+    toPrizeList (index, row) {
+      this.$router.push({ path:'/prizeList', query:{ id: row.id } })
     }
   },
   props: ['signonList', 'isEdit', 'callBack']

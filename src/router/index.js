@@ -9,7 +9,7 @@ const signonList = r => require.ensure([], () => r(require('@/page/signon/signon
 const buildSignon = r => require.ensure([], () => r(require('@/page/signon/buildSignon')), 'buildSignon')
 const buildScene = r => require.ensure([], () => r(require('@/page/signon/buildScene')), 'buildScene')
 const sceneList = r => require.ensure([], () => r(require('@/page/signon/sceneList')), 'sceneList')
-const prizeList = r => require.ensure([], () => r(require('@/page/signon/sceneList')), 'prizeList')
+const prizeList = r => require.ensure([], () => r(require('@/page/signon/prizeList')), 'prizeList')
 export default new Router({
   routes: [
     {
