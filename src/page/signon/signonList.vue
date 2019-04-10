@@ -13,6 +13,9 @@
           </el-pagination>
         </div>
       </div>
+      <div>
+        <edit-signon-dialog></edit-signon-dialog>
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +35,8 @@ export default {
     }
   },
   components: {
-    'signon-list': () => import('@/components/signonList.vue')
+    'signon-list': () => import('@/components/signonList.vue'),
+    'edit-signon-dialog': () => import('@/components/editSignonDialog.vue')
   },
   created () {
     this.initData(this.pageInfo)

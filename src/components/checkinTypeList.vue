@@ -1,5 +1,5 @@
-<template>
-  <el-select v-model="value"  @change="changeType" placeholder="请选择">
+<template>  
+  <el-select v-model="cValue"  @change="changeType" placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.type"
@@ -16,7 +16,7 @@ export default {
   },
   data () {
     return {
-      value: '',
+      cValue: this.value || '',
       options: []
     }
   },
@@ -40,12 +40,16 @@ export default {
       return data
     },
     changeType (type) {
-      console.log('@chengCheckINtype: ', type)
       let dataType = this.selectType(type)
-      this.callBack(dataType)
+      this.callBack && this.callBack(dataType)
     }
   },
-  props: ['callBack']
+  props: ['callBack', 'value'],
+  watch: {
+    'value': function (newVal, oldVal) {
+      this.cValue = newVal
+    }
+  }
 }
 </script>
 

@@ -47,10 +47,10 @@ export default {
       this.initData(this.pageInfo)
     },
     async handleSizeChange (data) {
-      this.sizeChange && this.sizeChange(data, { type: 1 })
+      this.sizeChange && this.sizeChange(data)
     },
     async handleCurrentChange (data) {
-      this.currentChange && this.currentChange(data, { type: 1 })
+      this.currentChange && this.currentChange(data)
     },
     open (params) { // 参数dynamic
       this.dynamic = params
@@ -65,7 +65,7 @@ export default {
     'prizeList': function (newVal, oldVal) {
       this.cPrizeList = newVal
     },
-   'total': function (newVal, oldVal) {
+    'total': function (newVal, oldVal) {
       this.cTotal = newVal
     }
   }

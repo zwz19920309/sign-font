@@ -18,14 +18,6 @@
         </el-form>
       </div>
       <div class="pad10">
-        <span>奖品配置: </span>
-        <div class="price-box pad10">
-           <span class="price_num" v-for="num in pricesNum" :key="num" @click="openPrizeList">
-              {{ num }}
-           </span>
-        </div>
-      </div>
-      <div class="pad10">
         <el-form :inline="true"  class="demo-form-inline">
           <el-form-item label="场景描述">
             <el-input  type="textarea" :rows="8" style="width: 450px;"  placeholder="请填写描述" v-model="desc"></el-input>
@@ -40,7 +32,6 @@
       <div class="pad10">
         <el-button type="primary" @click="submit">确认提交</el-button>
       </div>
-      <prize-list-dialog :isEdit="isEdit" ref="prizeListRef"></prize-list-dialog>
     </div>
   </div>
 </template>
@@ -68,8 +59,7 @@ export default {
   },
   components: {
     'date-type-list': () => import('@/components/dateTypeList.vue'),
-    'checkin-type-list': () => import('@/components/checkinTypeList.vue'),
-    'prize-list-dialog': () => import('@/components/prizeListDialog.vue')
+    'checkin-type-list': () => import('@/components/checkinTypeList.vue')
   },
   created () {
     console.log('@DATETYPE: ', DATETYPE)
@@ -98,24 +88,9 @@ export default {
       this.params.name = this.name
       this.params.desc = this.desc
       let res = await addSignon(this.params)
-    },
-    handlerRow (row) {
-      console.log('外编辑: ', row)
-    },
-    handlerAll (data) {
-      console.log('父删除: ', data)
-    },
-    async openPrizeList (prizeList) {
-      let that = this
-      this.$refs.prizeListRef.open({ 
-        actionbutton: [
-          { label: '添加', type: 'primary', size: 'mini', action: async function (row) { that.handlerRow(row) } }, 
-          { label: '删除', type: 'danger', size: 'mini', action: async function (row) { that.handlerRow(row) } }
-        ],
-        bluckActionbutton: [
-          { label: '批量添加', type: 'primary', size: 'mini', action: async function (data) { that.handlerAll(data) } }
-        ]
-      })
+      if (res.code === 0) {
+        this.$message({ message: '操作成功', type: 'success' })
+      }
     }
   }
 }

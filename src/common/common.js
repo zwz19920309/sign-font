@@ -5,3 +5,11 @@ export const DATETYPE = {
   YEAR: 4,
   USERDEFINED: 5
 }
+
+export const DATETYPEVALUE = {
+  1: 1,
+  2: 7,
+  3: 31,
+  4: 365,
+  5: 15
+}

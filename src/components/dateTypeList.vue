@@ -1,5 +1,5 @@
 <template>
-  <el-select v-model="value"  @change="changeType" placeholder="请选择">
+  <el-select v-model="cValue"  @change="changeType" placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.type"
@@ -16,7 +16,7 @@ export default {
   },
   data () {
     return {
-      value: '',
+      cValue: this.value || '',
       options: [],
       cType: this.type || 0
     }
@@ -29,7 +29,6 @@ export default {
       let res = await getDateTypeList({ type: type })
       if ((res.code === 0) && (res.data.list.length)) {
         this.options = res.data.list
-        this.value = ''
       }
     },
     selectType (type) {
@@ -43,14 +42,18 @@ export default {
     },
     changeType (type) {
       let dataType = this.selectType(type)
-      this.callBack(dataType)
+      this.callBack && this.callBack(dataType)
     }
   },
-  props: ['callBack', 'type'],
+  props: ['callBack', 'type', 'value'],
   watch: {
     'type': function (newVal, oldVal) {
       console.log('@type: ---')
       this.cType = newVal
+    },
+    'value': function (newVal, oldVal) {
+      console.log('@cValue: ', newVal)
+      this.cValue = newVal
     },
     cType: function (newVal, oldVal) {
       console.log('@CType: ---111111')

@@ -17,10 +17,7 @@
       <el-table-column prop="rule_desc" label="规则描述" width="250"></el-table-column>
       <el-table-column label="奖品管理" width="150">
         <template slot-scope="scope" >
-          <div v-if="scope.row.cycle_text.number">
-            <!-- <span  class="price_num" v-for="num in (parseInt(scope.row.cycle_text.number))" :key="num">
-            {{ num }}
-            </span> -->
+          <div>
             <span class="price_detial" @click="toPrizeList(scope.$index, scope.row)">奖品详情</span>
           </div>  
         </template>

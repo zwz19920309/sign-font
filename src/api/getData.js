@@ -21,9 +21,15 @@ export const getSignonList = data => fetch('/admin/signon/getSignonList', data, 
 export const addSignon = data => fetch('/admin/signon/addSignon', data, 'POST')
 
 /**
- * 场景配置奖励
+ * 签到模板配置奖励
  */
 export const signonBulkAddPrizes = data => fetch('/admin/signon/bulkAddPrizes', data, 'POST')
+
+/**
+ * 签到模板删除奖励
+ */
+export const signonBulkDeletePrizes = data => fetch('/admin/signon/bulkDeletePrizes', data, 'POST')
+
 /**
  * 根据id删除签到模板
  */
