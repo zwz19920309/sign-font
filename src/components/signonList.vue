@@ -27,14 +27,21 @@
       <el-table-column prop="createdAt" label="创建时间"></el-table-column>
       <el-table-column prop="desc" label="操作" width="180" v-if="isEdit">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-          <el-button type="danger" size="mini" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          <el-button v-for="(item, key) in cDynamic.actionbutton" :key="key" :type="item.type" :size="item.size" @click="func(item.action, scope.row)">
+            {{ item.label }}
+          </el-button>
+          <!-- <el-button type="primary" size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button type="danger" size="mini" @click="handleDelete(scope.$index, scope.row)">删除</el-button> -->
         </template>
       </el-table-column>
     </el-table>
     <div class="pad10 t-right" v-if="isEdit"> 
-      <el-button type="primary" @click="handleBluckEdit()">批量删除</el-button> 
+      <!-- <el-button type="primary" @click="handleBluckEdit()">批量删除</el-button>  -->
+      <el-button v-for="(item, key) in cDynamic.bluckActionbutton" :key="key" :type="item.type" :size="item.size" @click="func(item.action, prizes)">
+        {{ item.label }}
+      </el-button>
     </div>
+    <div><edit-signon-dialog :signon="signon" ref="editSignon"></edit-signon-dialog></div>
    </div>      
 </template>
 
@@ -42,19 +49,36 @@
 import { deleteSignon, bulkDeleteSignOn } from '@/api/getData'
 export default {
   components: {
+    'edit-signon-dialog': () => import('@/components/editSignonDialog.vue')
   },
   data () {
+    let that = this
     return {
-      signons: []
+      signon: {},
+      signons: [],
+      cDynamic: this.dynamic || {
+        actionbutton: [
+          { label: '编辑1', type: 'primary', size: 'mini', action: async function (row) { await that.handleEdit(row) } },
+          { label: '删除1', type: 'danger', size: 'mini', action: async function (row) { await that.handleDelete(row) } }
+        ],
+        bluckActionbutton: [
+          { label: '批量删除', type: 'danger', size: 'mini', action: async function () { await that.handleBluckEdit() } }
+        ]
+      } 
     }
   },
   created () {
   },
   methods: {
-    async handleEdit (data) {
-
+    async func (func, data) {
+      func && func(data)
     },
-    async handleDelete (index, row) {
+    async handleEdit (row) {
+      console.log('@EditData: ', row)
+      this.signon = row
+      this.$refs.editSignon.open()
+    },
+    async handleDelete (row) {
       console.log('@row: ', row)
       this.$confirm('确认删除该选项?', '提示', { confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning' }).then(async () => {
         let res = await deleteSignon({ id: row.id })
@@ -65,7 +89,6 @@ export default {
       })
     },
     async handleSelectionChange (data) {
-      console.log('@data: ', data)
       this.signons = data
     },
     async handleBluckEdit () {
@@ -84,7 +107,7 @@ export default {
       this.$router.push({ path:'/prizeList', query:{ id: row.id } })
     }
   },
-  props: ['signonList', 'isEdit', 'callBack']
+  props: ['signonList', 'isEdit', 'callBack', 'dynamic']
 }
 </script>
 

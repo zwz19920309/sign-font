@@ -1,8 +1,8 @@
 <template>
   <el-dialog  title="编辑模板" :visible.sync="dialogShow">
     <el-form >
-      <div class="pad10"><span>签到类型：</span><checkin-type-list :value="cSignon.value"></checkin-type-list></div>
-      <div class="pad10"><span>签到时间：</span><date-type-list :type="cSignon.type" :value="cSignon.dateValue"></date-type-list></div>
+      <div class="pad10"><span>签到类型：</span><checkin-type-list :value="cSignon.checkinype"></checkin-type-list></div>
+      <div class="pad10"><span>签到时间：</span><date-type-list :type="cSignon.signtype" :value="cSignon.dateValue"></date-type-list></div>
       <div class="pad10">
         <el-form :inline="true"  class="demo-form-inline">
           <el-form-item label="自定义时间段:">
@@ -35,12 +35,11 @@ export default {
   },
   data () {
     return {
-      cSignon: {},
-      dialogShow: true
+      cSignon: { params: '', period: '', checkinype: 1, type: 1, dateValue: 1 },
+      dialogShow: false
     }
   },
   created () {
-    this.cSignon = { params: '', period: '', value: 1, type: 1, dateValue: 1 }
   },
   methods: {
     open (params) { // 参数dynamic
@@ -51,7 +50,15 @@ export default {
       this.dialogShow = false
     }
   },
-  props: ['signon']
+  props: ['signon'],
+  watch: {
+    'signon': function (newVal, oldVal) {
+      console.log('@newVal: ', newVal)
+      if (newVal) {
+        this.signon = { checkinype: newVal.checkinype.type }
+      }
+    }
+  }
 }
 </script>
 
